@@ -4,9 +4,10 @@ The objective of this exercise is to document the steps, tools, and problem-solv
 This repository contains my personal write-ups for challenges across several cybersecurity areas, including:
 
 * Web Exploitation
-* Password Cracking
-* Digital Forensics
 * Cryptography
+* Password Cracking
+* Forensics
+
   
 Each write-up walks through my approach to solving the challenge, including how I interpreted the clues, investigated the problem, used relevant cybersecurity tools and techniques, and identified the flag.
 
