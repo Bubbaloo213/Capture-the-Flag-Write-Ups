@@ -167,3 +167,62 @@ Each write-up walks through my approach to solving the challenge, including how 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img width="316" height="329" alt="image" src="https://github.com/user-attachments/assets/b091c540-34b3-453b-b946-efe3c763c52f" />
 
+## Password Cracking
+### 1) Cracking 2
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="379" height="316" alt="image" src="https://github.com/user-attachments/assets/8d421524-d228-45c4-999a-795fdc3434b4" />
+
+1) By the instructions, we can identify that:
+   * Milo: has both a **Valid LANMAN Hash** : **Valid NT Hash**
+   * Mew: has a **Valid NT Hash**
+   * Mila: has a **Valid NT Hash**
+     
+2) For LANMAN, Hashcat mode is:
+
+  ```javascript
+  -m 3000
+  ```
+   
+3) For NTLM, Hashcat mode is:
+
+  ```javascript
+  -m 1000
+  ```
+### Create a file with the NTLM hashes
+4) Run:
+
+  ```javascript
+  nano hashes.txt
+  ```
+   
+5) Put only the NTLM hashes for each user (one per line):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="500" height="250" alt="image" src="https://github.com/user-attachments/assets/ec72ed24-cf8f-43a6-84ae-79e5e926e22e" />
+
+6) Save it with **Ctrl + O** > **Enter** > **Ctrl + X**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="500" height="250" alt="image" src="https://github.com/user-attachments/assets/57e82337-a3bf-4ac4-a77d-9d9288dcff06" />
+
+### Find your wordlist (potential password list)
+   
+7) Search for your rockyou.txt file. **RockYou** contains millions of potential passwords. Run:
+
+  ```javascript
+  ls /home/sec504/labs/lightninglabs/docker/ll1-john-winhashes/files/rockyou.txt
+  ```
+
+8) Potential passwords list found!
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="655" height="82" alt="image" src="https://github.com/user-attachments/assets/76487a26-7812-42a3-9605-500bd6f061a0" />
+
+### Run Hashcat against the NTLM hashes
+9) Run:
+
+  ```javascript
+  hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
+  ```
+**Flag:** Flag not found :(
